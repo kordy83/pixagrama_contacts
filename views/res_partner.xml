@@ -1,0 +1,535 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="group_out_travel" model="res.groups">
+            <field name="name">سياحه خارجيه</field>
+        </record>
+        <record id="group_in_travel" model="res.groups">
+            <field name="name">سياحه داخليه</field>
+        </record>
+        <record id="group_religion" model="res.groups">
+            <field name="name">ديني</field>
+        </record>
+        <record id="view_project_task_form" model="ir.ui.view">
+            <field name="name">project.task</field>
+            <field name="model">project.task</field>
+            <field name="inherit_id" ref="project.view_task_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_ids']" position="after">
+                    <field invisible="1" name="partner_group_id2"/>
+                    <field invisible="1" name="internal_group_id"/>
+                    <field invisible="1" name="internal_hij_group_id"/>
+                    <field invisible="1" name="internal_omra_group_id"/>
+                </xpath></field>
+        </record>
+        <record id="res_partner_group_hij_form_view" model="ir.ui.view">
+            <field name="name">res.partner.hij.group</field>
+            <field name="model">res.partner.hij.group</field>
+            <field name="arch" type="xml">
+                <form string="حج">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-archive" name="toggle_active" type="object">
+                                <field name="active" options='{"terminology": "archive"}' widget="boolean_button"/>
+                            </button>
+                            <button class="oe_stat_button" context="{'default_internal_hij_group_id': active_id}" icon="fa-tasks" name="get_related_tasks" type="object">
+                                <field name="task_count" string="Tasks" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-pencil-square-o" id="invoice_button2" name="open_partner_history2" type="object">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_invoiced" widget="monetary"/>
+                                    </span>
+                                    <span class="o_stat_text">
+                                        Invoiced
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <field class="oe_avatar" name="image" options='{"preview_image": "image_medium", "size": [90, 90]}' widget="image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                            <field name="trip_date"/>
+                            <field name="trip_place"/>
+                        </group>
+                        <notebook>
+                            <page string="العملاء">
+                                <field context="{'form_view_ref':'base.view_partner_form','default_is_religion':'True','default_is_hij':'True'}" name="partner_group_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                        <field invisible="1" name="partner_hij_group_id"/>
+                                    </tree></field>
+                            </page>
+                            <page string="الملفات">
+                                <field name="partner_files_ids"><tree editable="bottom">
+                                        <field name="attach_file2"/>
+                                    </tree></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="res_partner_group_hij_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.hij.group</field>
+            <field name="model">res.partner.hij.group</field>
+            <field name="arch" type="xml">
+                <tree string="حج">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree></field>
+        </record>
+        <record id="res_partner_group_religion_hij_action" model="ir.actions.act_window">
+            <field name="name">حج</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.hij.group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="res_partner_group_omra_form_view" model="ir.ui.view">
+            <field name="name">res.partner.omra.group</field>
+            <field name="model">res.partner.omra.group</field>
+            <field name="arch" type="xml">
+                <form string="عمره">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-archive" name="toggle_active" type="object">
+                                <field name="active" options='{"terminology": "archive"}' widget="boolean_button"/>
+                            </button>
+                            <button class="oe_stat_button" context="{'default_internal_omra_group_id': active_id}" icon="fa-tasks" name="get_related_tasks" type="object">
+                                <field name="task_count" string="Tasks" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-pencil-square-o" id="invoice_button2" name="open_partner_history2" type="object">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_invoiced" widget="monetary"/>
+                                    </span>
+                                    <span class="o_stat_text">
+                                        Invoiced
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <field class="oe_avatar" name="image" options='{"preview_image": "image_medium", "size": [90, 90]}' widget="image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                            <field name="trip_date"/>
+                            <field name="trip_place"/>
+                        </group>
+                        <notebook>
+                            <page string="العملاء">
+                                <field context="{'form_view_ref':'base.view_partner_form','default_is_omra':'True','default_is_religion':'True'}" name="partner_group_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                        <field invisible="1" name="partner_omra_group_id"/>
+                                    </tree></field>
+                            </page>
+                            <page string="الملفات">
+                                <field name="partner_files_ids"><tree editable="bottom">
+                                        <field name="attach_file2"/>
+                                    </tree></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="res_partner_group_omra_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.omra.group</field>
+            <field name="model">res.partner.omra.group</field>
+            <field name="arch" type="xml">
+                <tree string="عمره">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree></field>
+        </record>
+        <record id="res_partner_group_religion_omra_action" model="ir.actions.act_window">
+            <field name="name">عمره</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.omra.group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="res_partner_group_internal_form_view" model="ir.ui.view">
+            <field name="name">res.partner.internal.group</field>
+            <field name="model">res.partner.internal.group</field>
+            <field name="arch" type="xml">
+                <form string="الرحلات">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-archive" name="toggle_active" type="object">
+                                <field name="active" options='{"terminology": "archive"}' widget="boolean_button"/>
+                            </button>
+                            <button class="oe_stat_button" context="{'default_internal_group_id': active_id}" icon="fa-tasks" name="get_related_tasks" type="object">
+                                <field name="task_count" string="Tasks" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-pencil-square-o" id="invoice_button2" name="open_partner_history2" type="object">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_invoiced" widget="monetary"/>
+                                    </span>
+                                    <span class="o_stat_text">
+                                        Invoiced
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <field class="oe_avatar" name="image" options='{"preview_image": "image_medium", "size": [90, 90]}' widget="image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                            <field name="trip_date"/>
+                            <field name="trip_place"/>
+                        </group>
+                        <notebook>
+                            <page string="العملاء">
+                                <field context="{'form_view_ref':'base.view_partner_form','default_is_enternal':'True'}" name="partner_group_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                        <field invisible="1" name="partner_internal_group_id"/>
+                                    </tree></field>
+                            </page>
+                            <page string="الملفات">
+                                <field name="partner_files_ids"><tree editable="bottom">
+                                        <field name="attach_file2"/>
+                                    </tree></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+        <record id="res_partner_group_internal_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.internal.group</field>
+            <field name="model">res.partner.internal.group</field>
+            <field name="arch" type="xml">
+                <tree string="الرحلات">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree></field>
+        </record>
+        <record id="res_partner_group_internal_action" model="ir.actions.act_window">
+            <field name="name">سياحه داخليه</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.internal.group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="res_partner_group_form_view" model="ir.ui.view">
+            <field name="name">res.partner.group</field>
+            <field name="model">res.partner.group</field>
+            <field name="arch" type="xml">
+                <form string="الرحلات">
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button class="oe_stat_button" icon="fa-archive" name="toggle_active" type="object">
+                                <field name="active" options='{"terminology": "archive"}' widget="boolean_button"/>
+                            </button>
+                            <button class="oe_stat_button" context="{'default_partner_group_id2': active_id}" icon="fa-tasks" name="get_related_tasks" type="object">
+                                <field name="task_count" string="Tasks" widget="statinfo"/>
+                            </button>
+                            <button class="oe_stat_button" icon="fa-pencil-square-o" id="invoice_button2" name="open_partner_history2" type="object">
+                                <div class="o_form_field o_stat_info">
+                                    <span class="o_stat_value">
+                                        <field name="total_invoiced" widget="monetary"/>
+                                    </span>
+                                    <span class="o_stat_text">
+                                        Invoiced
+                                    </span>
+                                </div>
+                            </button>
+                        </div>
+                        <field class="oe_avatar" name="image" options='{"preview_image": "image_medium", "size": [90, 90]}' widget="image"/>
+                        <div class="oe_title">
+                            <h1>
+                                <field default_focus="1" name="name" placeholder="Name" required="1"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="description"/>
+                            <field name="trip_date"/>
+                            <field name="trip_place"/>
+                        </group>
+                        <notebook>
+                            <page string="العملاء">
+                                <field context="{'form_view_ref':'base.view_partner_form','default_is_external':'True'}" name="partner_group_ids">
+                                    <tree editable="bottom">
+                                        <field name="name"/>
+                                        <field name="phone"/>
+                                        <field name="email"/>
+                                        <field invisible="1" name="partner_group_id"/>
+                                    </tree></field>
+                            </page>
+                            <page string="الملفات">
+                                <field name="partner_files_ids"><tree editable="bottom">
+                                        <field name="attach_file2"/>
+                                    </tree></field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form></field>
+        </record>
+
+        <record id="res_partner_group_tree_view" model="ir.ui.view">
+            <field name="name">res.partner.group</field>
+            <field name="model">res.partner.group</field>
+            <field name="arch" type="xml">
+                <tree string="الرحلات">
+                    <field name="name"/>
+                    <field name="description"/>
+                </tree></field>
+        </record>
+
+        <record id="res_partner_group_action" model="ir.actions.act_window">
+            <field name="name">الرحلات</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner.group</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+        <record id="res_partner_form_inherit" model="ir.ui.view">
+            <field name="name">res.partner.form</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[1]" position="attributes">
+                    <attribute name="string">
+                        الاسره</attribute>
+                </xpath>
+                <xpath expr="//field[@name='child_ids']/form/sheet/group[1]" position="inside">
+                    <group>
+                        <field name="place_of_birth_date"/>
+                        <field name="date_of_birth"/>
+                        <field name="nationality"/>
+                        <field name="national_number"/>
+                        <field name="military_status"/>
+                        <field name="phone2"/>
+                        <field name="passport_number"/>
+                        <field name="passport_place"/>
+                        <field name="passport_start_date"/>
+                        <field name="passport_end_date"/>
+                        <field name="email_pix"/>
+                        <field name="password"/>
+                        <field name="embassy_password"/>
+                        <field name="received_file_date"/>
+                        <field name="required_paper"/>
+                        <field name="country_id"/>
+                        <field name="code2"/>
+                        <field name="cgi"/>
+                        <field name="description"/>
+                        <field name="att_file"/>
+                        <field name="embassy_date"/>
+                        <field name="previous_visa"/>
+                        <field name="visa_state"/>
+                        <field name="visa_type"/>
+                        <field name="translation_paper"/>
+                        <field name="translation_type"/>
+                        <field name="translation_fees"/>
+                        <field name="embassy_fess"/>
+                        <field name="file_fess"/>
+                        <field name="payment_type"/>
+                        <field name="embassy_address"/>
+                        <field name="embassy_email"/>
+                        <field name="embassy_phone"/>
+                        <field name="region22"/>
+                        <field name="hospital_name"/>
+                        <field name="address22"/>
+                        <field name="patient_type"/>
+                        <field name="hotel_name"/>
+                        <field name="confirmation_date"/>
+                        <field name="retrieve_date"/>
+                        <field name="cancel_date"/>
+                        <field name="pin_code"/>
+                        <field name="confirmation_code"/>
+                    </group>
+                </xpath>
+                <!--              <xpath expr="//field[@name='fax']" position="attributes">-->
+                <!--                  <attribute name="invisible">1</attribute>-->
+                <!--              </xpath>-->
+                <xpath expr="//group/group[1]" position="inside">
+                    <field invisible="1" name="is_external"/>
+                    <field invisible="is_external == False" name="place_of_birth_date"/>
+                    <field invisible="is_external == False" name="date_of_birth"/>
+                    <field invisible="is_external == False" name="nationality"/>
+                    <field invisible="is_external == False" name="national_number"/>
+                    <field invisible="is_external == False" name="military_status"/>
+                    <field invisible="is_external == False" name="phone2"/>
+                    <field invisible="is_external == False" name="passport_number"/>
+                    <field invisible="is_external == False" name="passport_place"/>
+                    <field invisible="is_external == False" name="passport_start_date"/>
+                    <field invisible="is_external == False" name="passport_end_date"/>
+                    <field invisible="is_external == False" name="email_pix"/>
+                    <field invisible="is_external == False" name="password"/>
+                    <field invisible="is_external == False" name="embassy_password"/>
+                    <field invisible="is_external == False" name="received_file_date"/>
+                    <field invisible="is_external == False" name="required_paper"/>
+                    <field invisible="is_external == False" name="country_id"/>
+                    <field name="country_id"/>
+                    <field invisible="is_external == False" name="code2"/>
+                    <field invisible="is_external == False" name="cgi"/>
+                    <field invisible="is_external == False" name="description"/>
+                    <field invisible="is_external == False" name="att_file"/>
+                    <field invisible="1" name="is_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_family_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_childs_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_babys_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_free_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_boys_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_days_enternal"/>
+                    <field invisible="is_enternal == False" name="child_no_enternal"/>
+                    <field invisible="is_enternal == False" name="hotel_name_enternal"/>
+                    <field invisible="is_enternal == False" name="hotel_address_enternal"/>
+                    <field invisible="is_enternal == False" name="hotel_number_enternal"/>
+                    <field invisible="is_enternal == False" name="hotel_level_enternal"/>
+                    <field invisible="1" name="is_religion"/>
+                    <field invisible="1" name="is_hij"/>
+                    <field invisible="1" name="is_omra"/>
+                    <field invisible="1" name="is_commercial"/>
+                    <field invisible="1" name="is_free"/>
+                    <field invisible="is_religion == False" name="mobile_religion"/>
+                    <field invisible="is_religion == False" name="service_type_religion"/>
+                    <field invisible="is_religion == False" name="passport_no_religion"/>
+                    <field invisible="is_religion == False" name="region_start_religion"/>
+                    <field invisible="is_religion == False" name="start_date_religion"/>
+                    <field invisible="is_religion == False" name="finish_date_religion"/>
+                    <field invisible="is_religion == False" name="finger_print_religion"/>
+                    <field invisible="is_religion == False" name="traveling_date_religion"/>
+                    <field invisible="is_religion == False" name="medical_religion"/>
+                    <field invisible="is_religion == False" name="gift_religion"/>
+                    <field invisible="is_religion == False" name="agency_religion"/>
+                </xpath>
+                <xpath expr="//group/group[2]" position="inside">
+                    <field invisible="is_external == False" name="embassy_date"/>
+                    <field invisible="is_external == False" name="previous_visa"/>
+                    <field invisible="is_external == False" name="visa_state"/>
+                    <field invisible="is_external == False" name="visa_type"/>
+                    <field invisible="is_external == False" name="translation_paper"/>
+                    <field invisible="is_external == False" name="translation_type"/>
+                    <field invisible="is_external == False" name="translation_fees"/>
+                    <field invisible="is_external == False" name="embassy_fess"/>
+                    <field invisible="is_external == False" name="file_fess"/>
+                    <field invisible="is_external == False" name="payment_type"/>
+                    <field invisible="is_external == False" name="embassy_address"/>
+                    <field invisible="is_external == False" name="embassy_email"/>
+                    <field invisible="is_external == False" name="embassy_phone"/>
+                    <field invisible="is_external == False" name="region22"/>
+                    <field invisible="is_external == False" name="hospital_name"/>
+                    <field invisible="is_external == False" name="address22"/>
+                    <field invisible="is_external == False" name="patient_type"/>
+                    <field invisible="is_external == False" name="hotel_name"/>
+                    <field invisible="is_external == False" name="confirmation_date"/>
+                    <field invisible="is_external == False" name="retrieve_date"/>
+                    <field invisible="is_external == False" name="cancel_date"/>
+                    <field invisible="is_external == False" name="pin_code"/>
+                    <field invisible="is_external == False" name="confirmation_code"/>
+                    <field invisible="is_enternal == False" name="reservation_employee_enternal"/>
+                    <field invisible="is_enternal == False" name="is_aqua_bark_enternal"/>
+                    <field invisible="is_enternal == False" name="single_double_enternal"/>
+                    <field invisible="is_enternal == False" name="room_type_enternal"/>
+                    <field invisible="is_enternal == False" name="no_of_members_enternal"/>
+                    <field invisible="is_enternal == False" name="iqama_system_enternal"/>
+                    <field invisible="is_enternal == False" name="extra_service_enternal"/>
+                    <field invisible="is_religion == False" name="shipment_company2_religion"/>
+                    <field invisible="is_religion == False" name="shipment_company_religion"/>
+                    <field invisible="is_religion == False" name="company_religion"/>
+                    <field invisible="is_religion == False" name="director_religion"/>
+                    <field invisible="is_religion == False" name="hotel_name_maka_religion"/>
+                    <field invisible="is_religion == False" name="hotel_madina_level_religion"/>
+                    <field invisible="is_religion == False" name="iqama_maka_religion"/>
+                    <field invisible="is_religion == False" name="hotel_madina_name_religion"/>
+                    <field invisible="is_religion == False" name="hotel_maka_level_religion"/>
+                    <field invisible="is_religion == False" name="iqama_madina_religion"/>
+                    <field invisible="is_religion == False" name="time_religion"/>
+                    <field invisible="is_religion == False" name="job_religion"/>
+                </xpath></field>
+        </record>
+        <record id="res_partner_external_action" model="ir.actions.act_window">
+            <field name="name">سياحه خارجيه</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_external':'True'}</field>
+            <field name="domain">[('is_external','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="res_partner_internal_action" model="ir.actions.act_window">
+            <field name="name">سياحه داخليه</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_enternal':'True'}</field>
+            <field name="domain">[('is_enternal','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="res_partner_religion_action" model="ir.actions.act_window">
+            <field name="name">حج</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_religion':'True','default_is_hij':'True'}</field>
+            <field name="domain">[('is_religion','=',True),('is_hij','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="res_partner_omra_action" model="ir.actions.act_window">
+            <field name="name">عمره</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_omra':'True','default_is_religion':'True'}</field>
+            <field name="domain">[('is_omra','=',True),('is_religion','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="res_partner_commercial_action" model="ir.actions.act_window">
+            <field name="name">زياره تجاريه</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_commercial':'True','default_is_religion':'True'}</field>
+            <field name="domain">[('is_commercial','=',True),('is_religion','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <record id="res_partner_free_action" model="ir.actions.act_window">
+            <field name="name">اقامه حره</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_free':'True','default_is_religion':'True'}</field>
+            <field name="domain">[('is_free','=',True),('is_religion','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+        <menuitem id="res_partner_root_menu" name="Pixagrama" sequence="1"/>
+
+        <menuitem groups="pixagrama_contacts.group_out_travel" id="res_partner_traveling_root_menu" name="سياحه خارجيه" parent="res_partner_root_menu" sequence="1"/>
+        <menuitem id="res_partner_traveling_child_menu" name="سياحه خارجيه" parent="res_partner_traveling_root_menu"/>
+        <menuitem action="res_partner_external_action" id="res_partner_individule_traveling_menu" name="فرد" parent="res_partner_traveling_child_menu" sequence="1"/>
+        <menuitem action="res_partner_group_action" id="res_partner_group_traveling_menu" name="مجموعات" parent="res_partner_traveling_child_menu" sequence="2"/>
+
+        <menuitem groups="pixagrama_contacts.group_in_travel" id="res_partner_internal_root_menu" name="سياحه داخليه" parent="res_partner_root_menu" sequence="2"/>
+        <menuitem id="res_partner_internal_child_menu" name="سياحه داخليه" parent="res_partner_internal_root_menu"/>
+        <menuitem action="res_partner_internal_action" id="res_partner_internal_traveling_menu2" name="فرد" parent="res_partner_internal_child_menu" sequence="1"/>
+        <menuitem action="res_partner_group_internal_action" id="res_partner_group_internal_menu" name="مجموعات" parent="res_partner_internal_child_menu" sequence="2"/>
+
+        <menuitem groups="pixagrama_contacts.group_religion" id="res_partner_religion_root_menu" name="ديني" parent="res_partner_root_menu" sequence="3"/>
+
+        <menuitem id="res_partner_religion_child_menu" name="حج" parent="res_partner_religion_root_menu" sequence="1"/>
+        <menuitem action="res_partner_religion_action" id="res_partner_hij_traveling_menu" name="فرد" parent="res_partner_religion_child_menu" sequence="1"/>
+        <menuitem action="res_partner_group_religion_hij_action" id="res_partner_hij_group_religion_menu" name="مجموعات" parent="res_partner_religion_child_menu" sequence="2"/>
+
+        <menuitem id="res_partner_omra_religion_child_menu" name="عمره" parent="res_partner_religion_root_menu" sequence="2"/>
+        <menuitem action="res_partner_omra_action" id="res_partner_omra_traveling_menu" name="فرد" parent="res_partner_omra_religion_child_menu" sequence="1"/>
+        <menuitem action="res_partner_group_religion_omra_action" id="res_partner_omra_group_religion_menu" name="مجموعات" parent="res_partner_omra_religion_child_menu" sequence="2"/>
+
+        <menuitem id="res_partner_commercial_child_menu" name="زياره تجاريه" parent="res_partner_religion_root_menu" sequence="3"/>
+        <menuitem action="res_partner_commercial_action" id="res_partner_internal_traveling_menu" name="فرد" parent="res_partner_commercial_child_menu" sequence="1"/>
+
+        <menuitem id="res_partner_free_root_menu" name="اقامه حره" parent="res_partner_religion_root_menu" sequence="4"/>
+        <menuitem action="res_partner_free_action" id="res_partner_free_child_menu" name="فرد" parent="res_partner_free_root_menu" sequence="1"/>
+    </data>
+</odoo>
