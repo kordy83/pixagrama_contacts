@@ -7,8 +7,17 @@
         <record id="group_in_travel" model="res.groups">
             <field name="name">incoming</field>
         </record>
+		<record id="group_domestic" model="res.groups">
+            <field name="name">Domestic</field>
+        </record>
         <record id="group_religion" model="res.groups">
             <field name="name">Umrah and haij</field>
+        </record>
+		<record id="group_investment" model="res.groups">
+            <field name="name">Investment</field>
+        </record>
+		<record id="group_Trips" model="res.groups">
+            <field name="name">Trips</field>
         </record>
 		
         <record id="view_project_task_form" model="ir.ui.view">
@@ -313,51 +322,51 @@
                 <xpath expr="//field[@name='child_ids']/form/sheet/group[1]" position="inside">
                     <group >
 					    
-					  <!--     <field name="place_of_birth_date" string ="first name"/>
-                           <field name="date_of_birth" string ="sure name"/>
-                           <field name="nationality" string ="full name"/>
-                           <field name="national_number" string ="passport number"/>
-                           <field name="military_status" string ="place of birth"/>
-                           <field name="phone2" string ="date of birth"/>
-                           <field name="passport_number" string ="date of issue"/>
-                           <field name="passport_place" string ="date of expiry"/>
-                           <field name="passport_start_date" string ="issuing office"/>
-                           <field name="passport_end_date" string ="profession"/>
-                           <field name="email_pix" string ="name of husband"/>
-                          <field name="password" string ="nationality"/>
-                           <field name="embassy_password" string ="address"/>-->
+					  <field name="place_of_birth_date"/>
+                           <field name="date_of_birth"/>
+                           <field name="nationality"/>
+                           <field name="national_number"/>
+                           <field name="military_status"/>
+                           <field name="phone2"/>
+                           <field name="passport_number"/>
+                           <field name="passport_place"/>
+                           <field name="passport_start_date"/>
+                           <field name="passport_end_date"/>
+                           <field name="email_pix"/>
+                          <field name="password"/>
+                           <field name="embassy_password"/>
 
                         
-                      <!--  <field name="received_file_date" string ="1"/>
-                        <field name="required_paper" string ="1"/>
-                        <field name="country_id" string ="1"/>
-                        <field name="code2" string ="1"/>
-                       <field name="cgi" string =""/>
-                      <field name="description" string =""/>
-                        <field name="att_file" string ="1"/>
-                        <field name="embassy_date" string ="1"/>
-                        <field name="previous_visa" string ="1"/>
-                        <field name="visa_state string ="""/>
-                       <field name="visa_type" string ="1"/>
-                        <field name="translation_paper" string ="1"/>
-                        <field name="translation_type" string ="1"/>
-                        <field name="translation_fees" string ="1"/>
-                        <field name="embassy_fess" string ="1"/>
-                        <field name="file_fess" string =""/>
-                        <field name="payment_type" string =""/>
-                        <field name="embassy_address" string =""/>
-                        <field name="embassy_email" string =""/>
-                        <field name="embassy_phone" string =""/>
-                        <field name="region22" string =""/>-->
-<!--                        <field name="hospital_name" string =""/>-->
-<!--                        <field name="address22" string =""/>-->
-<!--                        <field name="patient_type" string =""/>-->
-<!--                        <field name="hotel_name" string =""/>-->
-<!--                        <field name="confirmation_date" string =""/>-->
-<!--                        <field name="retrieve_date" string =""/>-->
-<!--                        <field name="cancel_date" string =""/>-->
-<!--                        <field name="pin_code" string =""/>-->
-                        <field name="confirmation_code" string =""/>
+                      <field name="received_file_date"/>
+                        <field name="required_paper"/>
+                        <field name="country_id"/>
+                        <field name="code2"/>
+                       <field name="cgi"/>
+                      <field name="description" string="description"/>
+                        <field name="att_file"/>
+                        <field name="embassy_date"/>
+                        <field name="previous_visa"/>
+                        <field name="visa_state" string="visa state"/>
+                       <field name="visa_type"/>
+                        <field name="translation_paper"/>
+                        <field name="translation_type"/>
+                        <field name="translation_fees"/>
+                        <field name="embassy_fess"/>
+                        <field name="file_fess"/>
+                        <field name="payment_type"/>
+                        <field name="embassy_address"/>
+                        <field name="embassy_email"/>
+                        <field name="embassy_phone"/>
+                        <field name="region22"/>
+                       <field name="hospital_name" string="hospital name"/>
+                        <field name="address22" string="Address"/>
+                       <field name="patient_type" string="patient type"/>
+                       <field name="hotel_name"/>
+                      <field name="confirmation_date" string="confirmation date"/>
+                       <field name="retrieve_date" string="retrieve date"/>
+                        <field name="cancel_date" string="cancel date"/>
+                       <field name="pin_code"/>
+                        <field name="confirmation_code"/>
                     </group>
                 </xpath>
                 <!--              <xpath expr="//field[@name='fax']" position="attributes">-->
@@ -366,7 +375,7 @@
                 <xpath expr="//group/group[1]" position="inside">
 				
 				
-				 
+				    
                     <field invisible="1" name="is_external"/>
 
                     <field invisible="is_external == False" name="place_of_birth_date" string ="how you know us"/>
@@ -428,6 +437,72 @@
                     <field invisible="is_religion == False" name="received_file_date" string ="postal code"/>
                     <field invisible="is_religion == False" name="country2_id" string ="country"/>
                     <field invisible="is_religion == False" name="att_file" string ="upload"/>
+					
+					<field invisible="1" name="is_domestic"/>
+					<field invisible="is_domestic == False" name="place_of_birth_date" string ="how you know us"/>
+					<field invisible="is_domestic == False" name="hotel_name"/>
+					<field invisible="is_domestic == False" name="address11"/>
+					<field invisible="is_domestic == False" name="hotel_phone"/>
+					<field invisible="is_domestic == False" name="gov"/>
+					<field invisible="is_domestic == False" name="area"/>
+					<field invisible="is_domestic == False" name="supplier"/>
+					<field invisible="is_domestic == False" name="reservation_manger"/>
+					<field invisible="is_domestic == False" name="phone_number"/>
+					<field invisible="is_domestic == False" name="check_in_date"/>
+					<field invisible="is_domestic == False" name="check_out_date"/>
+					<field invisible="is_domestic == False" name="room_type"/>
+					<field invisible="is_domestic == False" name="number_of_rooms"/>
+					<field invisible="is_domestic == False" name="meal_policy"/>
+					<field invisible="is_domestic == False" name="child_policy"/>
+					<field invisible="is_domestic == False" name="canulation_policy"/>
+					<field invisible="is_domestic == False" name="how_many_nights"/>
+					<field invisible="is_domestic == False" name="facilities"/>
+					<field invisible="is_domestic == False" name="rating"/>
+					<field invisible="is_domestic == False" name="level"/>
+					<field invisible="is_domestic == False" name="bad_review"/>
+					<field invisible="is_domestic == False" name="extra_services"/>
+					<field invisible="is_domestic == False" name="confirmation_code" string ="other"/>
+
+					
+					<field invisible="1" name="is_investment"/>
+					<field invisible="is_investment == False" name="place_of_birth_date" string ="how you know us"/>
+                     <field invisible="is_investment == False" name="required_paper" string ="first name"/>
+                    <field invisible="is_investment == False" name="nationality" string ="sure name"/>
+                    <field invisible="is_investment == False" name="national_number" string ="full name"/>
+                    <field invisible="is_investment == False" name="passport_number" string ="passport number"/>
+                    <field invisible="is_investment == False" name="military_status" string ="place of birth"/>
+                    <field invisible="is_investment == False" name="date_of_birth" string ="date of birth"/>
+                    <field invisible="is_investment == False" name="passport_start_date" string ="date of issue"/>
+                    <field invisible="is_investment == False" name="passport_end_date" string ="date of expiry"/>
+                    <field invisible="is_investment == False" name="passport_place" string ="issuing office"/>
+
+                    <field invisible="is_investment == False" name="email_pix" string ="profession"/>
+                    <field invisible="is_investment == False" name="password" string ="name of husband"/>
+                    <field invisible="is_investment == False" name="country3_id" string ="nationalty"/>
+                    <field invisible="is_investment == False" name="embassy_password" string ="address"/>
+                    <field invisible="is_investment == False" name="received_file_date" string ="postal code"/>
+                    <field invisible="is_investment == False" name="country2_id" string ="country"/>
+                    <field invisible="is_investment == False" name="att_file" string ="upload"/>
+					
+					<field invisible="1" name="is_trips"/>
+					<field invisible="is_trips == False" name="place_of_birth_date" string ="how you know us"/>
+                     <field invisible="is_trips == False" name="required_paper" string ="first name"/>
+                    <field invisible="is_trips == False" name="nationality" string ="sure name"/>
+                    <field invisible="is_trips == False" name="national_number" string ="full name"/>
+                    <field invisible="is_trips == False" name="passport_number" string ="passport number"/>
+                    <field invisible="is_trips == False" name="military_status" string ="place of birth"/>
+                    <field invisible="is_trips == False" name="date_of_birth" string ="date of birth"/>
+                    <field invisible="is_trips == False" name="passport_start_date" string ="date of issue"/>
+                    <field invisible="is_trips == False" name="passport_end_date" string ="date of expiry"/>
+                    <field invisible="is_trips == False" name="passport_place" string ="issuing office"/>
+
+                    <field invisible="is_trips == False" name="email_pix" string ="profession"/>
+                    <field invisible="is_trips == False" name="password" string ="name of husband"/>
+                    <field invisible="is_trips == False" name="country3_id" string ="nationalty"/>
+                    <field invisible="is_trips == False" name="embassy_password" string ="address"/>
+                    <field invisible="is_trips == False" name="received_file_date" string ="postal code"/>
+                    <field invisible="is_trips == False" name="country2_id" string ="country"/>
+                    <field invisible="is_trips == False" name="att_file" string ="upload"/>
                 
 
                 </xpath>
@@ -522,6 +597,79 @@
                   <field invisible="is_religion == False" name="att_file8" string ="upload"/>
                   <field invisible="is_religion == False" name="att_file9" string ="upload"/>
                   <field invisible="is_religion == False" name="att_file10" string ="upload"/>
+				  
+				  <field invisible="is_trips == False" name="phone2" string ="phone 2"/>
+                    <field invisible="is_trips == False" name="email2" string ="e-mail"/>
+                    <field invisible="is_trips == False" name="previous_visa" string ="email password"/>
+                    <field invisible="is_trips == False" name="vtype" string ="registration phone"/>
+                    <field invisible="is_trips == False" name="vstate" string ="consulate password"/>
+                    <field invisible="is_trips == False" name="translation_paper" string ="confirmation code"/>
+                    <field invisible="is_trips == False" name="translation_type" string ="confirmation id"/>
+
+                    <field invisible="is_trips == False" name="embassy_fess" string ="visa type"/>
+
+                    <field invisible="is_trips == False" name="payment_type" string ="visa duration"/>
+                    <field invisible="is_trips == False" name="embassy_address" string ="consulate agemcy"/>
+                    <field invisible="is_trips == False" name="embassy_email" string ="consulate phone"/>
+                    <field invisible="is_trips == False" name="embassy_phone" string ="consulate address"/>
+                    <field invisible="is_trips == False" name="region22" string ="visa agency fees"/>
+                    <field invisible="is_trips == False" name="file_fess" string ="transportation fees"/>
+                    <field invisible="is_trips == False" name="translation_fees" string ="translation fees"/>
+                    <field invisible="is_trips == False" name="pin_code" string ="print documents fees "/>
+                    <field invisible="is_trips == False" name="confirmation_code" string ="other"/>
+                    <field invisible="is_trips == False" name="att_file1" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file2" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file3" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file4" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file5" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file6" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file7" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file8" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file9" string ="upload"/>
+                  <field invisible="is_trips == False" name="att_file10" string ="upload"/>
+				  
+				  <field invisible="is_domestic == False" name="phone2" string ="phone 2"/>
+				  <field invisible="is_domestic == False" name="att_file1" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file2" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file3" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file4" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file5" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file6" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file7" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file8" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file9" string ="upload"/>
+                  <field invisible="is_domestic == False" name="att_file10" string ="upload"/>
+				  
+				  
+				  <field invisible="is_investment == False" name="phone2" string ="phone 2"/>
+                    <field invisible="is_investment == False" name="email2" string ="e-mail"/>
+                    <field invisible="is_investment == False" name="previous_visa" string ="email password"/>
+                    <field invisible="is_investment == False" name="vtype" string ="registration phone"/>
+                    <field invisible="is_investment == False" name="vstate" string ="consulate password"/>
+                    <field invisible="is_investment == False" name="translation_paper" string ="confirmation code"/>
+                    <field invisible="is_investment == False" name="translation_type" string ="confirmation id"/>
+
+                    <field invisible="is_investment == False" name="embassy_fess" string ="visa type"/>
+
+                    <field invisible="is_investment == False" name="payment_type" string ="visa duration"/>
+                    <field invisible="is_investment == False" name="embassy_address" string ="consulate agemcy"/>
+                    <field invisible="is_investment == False" name="embassy_email" string ="consulate phone"/>
+                    <field invisible="is_investment == False" name="embassy_phone" string ="consulate address"/>
+                    <field invisible="is_investment == False" name="region22" string ="visa agency fees"/>
+                    <field invisible="is_investment == False" name="file_fess" string ="transportation fees"/>
+                    <field invisible="is_investment == False" name="translation_fees" string ="translation fees"/>
+                    <field invisible="is_investment == False" name="pin_code" string ="print documents fees "/>
+                    <field invisible="is_investment == False" name="confirmation_code" string ="other"/>
+                    <field invisible="is_investment == False" name="att_file1" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file2" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file3" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file4" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file5" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file6" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file7" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file8" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file9" string ="upload"/>
+                  <field invisible="is_investment == False" name="att_file10" string ="upload"/>
 
                 </xpath>
                 <xpath expr="//field[@name='website']" position="attributes">
@@ -545,12 +693,36 @@
             <field name="domain">[('is_enternal','=',True)]</field>
             <field name="view_mode">kanban,tree,form</field>
         </record>
+		<record id="res_partner_domestic_action" model="ir.actions.act_window">
+            <field name="name">Domestic</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_domestic':'True'}</field>
+            <field name="domain">[('is_domestic','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
         <record id="res_partner_religion_action" model="ir.actions.act_window">
             <field name="name">Umrah and haij</field>
             <field name="type">ir.actions.act_window</field>
             <field name="res_model">res.partner</field>
             <field name="context">{'default_is_religion':'True','default_is_hij':'True'}</field>
             <field name="domain">[('is_religion','=',True),('is_hij','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+		<record id="res_partner_investment_action" model="ir.actions.act_window">
+            <field name="name">Investment</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_investment':'True'}</field>
+            <field name="domain">[('is_investment','=',True)]</field>
+            <field name="view_mode">kanban,tree,form</field>
+        </record>
+		<record id="res_partner_trips_action" model="ir.actions.act_window">
+            <field name="name">Trips</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">res.partner</field>
+            <field name="context">{'default_is_trips':'True'}</field>
+            <field name="domain">[('is_trips','=',True)]</field>
             <field name="view_mode">kanban,tree,form</field>
         </record>
 		
@@ -584,10 +756,11 @@
        
 
         <menuitem groups="pixagrama_contacts.group_in_travel" id="res_partner_internal_root_menu" name="incoming" parent="res_partner_root_menu" action="res_partner_internal_action" sequence="2"/>
+        <menuitem groups="pixagrama_contacts.group_domestic" id="res_partner_domestic_root_menu" name="Domestic" parent="res_partner_root_menu" action="res_partner_domestic_action" sequence="3"/>
 
-
-        <menuitem groups="pixagrama_contacts.group_religion" id="res_partner_religion_root_menu" name="Umrah and haij" parent="res_partner_root_menu" action="res_partner_religion_action" sequence="3"/>
-		
+        <menuitem groups="pixagrama_contacts.group_religion" id="res_partner_religion_root_menu" name="Umrah and haij" parent="res_partner_root_menu" action="res_partner_religion_action" sequence="4"/>
+		<menuitem groups="pixagrama_contacts.group_investment" id="res_partner_investment_root_menu" name="Investment" parent="res_partner_root_menu" action="res_partner_investment_action" sequence="6"/>
+		<menuitem groups="pixagrama_contacts.group_Trips" id="res_partner_trips_root_menu" name="Trips" parent="res_partner_root_menu" action="res_partner_trips_action" sequence="6"/>
 
         
     </data>
